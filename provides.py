@@ -30,7 +30,7 @@ class VaultKVProvides(Endpoint):
                       'hostname',
                       'isolated'):
             flag = self.expand_name('endpoint.{endpoint_name}.'
-                                    'changed.{}'.format(field))
+                                    'changed.{}').format(field)
             any_fields_changed = any_fields_changed or is_flag_set(flag)
             clear_flag(flag)
         toggle_flag(self.expand_name('{endpoint_name}.connected'),
