@@ -82,6 +82,23 @@ class VaultKVRequires(Endpoint):
         return self.all_joined_units.received.get(token_key)
 
     @property
+    def all_unit_tokens(self):
+        """Retrieve the one-shot token(s) for secret_id retrieval for
+        all application units or empty list.
+
+        :returns token: Vault one-shot token for secret_id response
+        :rtype token: str"""
+        token_key = '{}_token'.format(hookenv.local_unit())
+        tokens = set()
+        for relation in self.relations:
+            for unit in relation.units:
+                token = unit.get(token_key)
+                if token:
+                    tokens.add(token)
+
+        return list(tokens)
+
+    @property
     def vault_url(self):
         """Retrieve the URL to access Vault
 
