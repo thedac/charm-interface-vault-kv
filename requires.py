@@ -92,7 +92,7 @@ class VaultKVRequires(Endpoint):
         tokens = set()
         for relation in self.relations:
             for unit in relation.units:
-                token = unit.get(token_key)
+                token = unit.received.get(token_key)
                 if token:
                     tokens.add(token)
 
